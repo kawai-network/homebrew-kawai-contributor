@@ -17,6 +17,11 @@ class KawaiContributor < Formula
   license "MIT"
 
   def install
+    # Remove quarantine attribute (required for binaries from external sources)
+    if MacOS.version >= :catalina
+      system "xattr", "-d", "com.apple.quarantine", "kawai-contributor"
+    end
+
     bin.install "kawai-contributor"
   end
 
